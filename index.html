@@ -207,5 +207,24 @@
   </div>
 </div>
 
+<script>
+(function(){
+  function sendHeight(){
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'antarctica-gallery-height', height: h }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(sendHeight);
+  }
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(sendHeight).observe(document.body);
+  } else {
+    setInterval(sendHeight, 500);
+  }
+})();
+</script>
+
 </body>
 </html>
