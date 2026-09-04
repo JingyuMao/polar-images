@@ -210,7 +210,7 @@
 <script>
 (function(){
   function sendHeight(){
-    var h = document.documentElement.scrollHeight;
+    var h = Math.ceil(document.body.getBoundingClientRect().height);
     window.parent.postMessage({ type: 'antarctica-gallery-height', height: h }, '*');
   }
   window.addEventListener('load', sendHeight);
